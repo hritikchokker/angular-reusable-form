@@ -1,27 +1,34 @@
-<div>
-  <form #formRef  [formGroup]="formGroup" (formSubmitted)="onSubmit($event)"
-    *reusableFormDir="formGroup">
+<div class="form-container">
+  <form  [formGroup]="formGroup" (formSubmitted)="onSubmit($event)" reusableFormDir>
     <div>
-      <label> User Name
-        <input formControlName="userName" type="text" />
-      </label>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="userName" type="text" />
+      </mat-form-field>
     </div>
     <div>
-      <label> Email
-        <input formControlName="email" type="email" />
-      </label>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+      </mat-form-field>
     </div>
     <div>
-      <label> Password
-        <input formControlName="password" type="password" />
-      </label>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="text" />
+      </mat-form-field>
     </div>
     <div>
-      <label> Mobile Number
-        <input formControlName="mobileNo" type="number" />
-      </label>
+      <mat-form-field>
+        <mat-label>Mobile Number</mat-label>
+        <input matInput formControlName="mobileNo" type="text" />
+      </mat-form-field>
+    </div>
+    <div class="submit-container">
+      <button type="submit" mat-raised-button color="warn">Submit</button>
     </div>
   </form>
+  <!-- <div>
+    <button (click)="toggleIt()" mat-raised-button color="accent">toggle form</button>
+  </div> -->
 </div>
-
-<button (click)="toggleIt()" mat-raised-button color="accent">toggle form</button>

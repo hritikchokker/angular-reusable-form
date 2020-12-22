@@ -1,4 +1,7 @@
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterFormExampleComponent } from './register-form-example.component';
@@ -11,7 +14,10 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule.forChild([{path:'',component:RegisterFormExampleComponent}]),
     ReactiveFormsModule,
-    ReusableFormDirectiveModule
+    ReusableFormDirectiveModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class RegisterFormExampleModule { }
