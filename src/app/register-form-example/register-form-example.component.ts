@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-form-example',
@@ -11,10 +11,10 @@ export class RegisterFormExampleComponent implements OnInit,AfterViewInit {
   formGroup: FormGroup;
   constructor(private _fb: FormBuilder) {
     this.formGroup = this._fb.group({
-      userName: [],
-      email: [],
-      password: [],
-      mobileNo: []
+      userName: ['',[Validators.required]],
+      email: ['',[Validators.required]],
+      password: ['', [Validators.required]],
+      mobileNo: ['', [Validators.required]],
     });
   }
 

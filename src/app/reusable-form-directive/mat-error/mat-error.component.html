@@ -1,5 +1,13 @@
-<!-- <div style="width: 100%; display: block;"> -->
-  <p>mat-error works!</p>
+<div style="width: 100%; display: block;">
+  <ng-container *ngIf="formControl">
+    <p *ngIf="formControl.hasError('required')&& formControl.dirty|| formControl.pending">
+      {{fieldName}} is required
+    </p>
+  </ng-container>
+  <p >
+  </p>
+  <!-- <p *ngIf="formControl.hasError('required')">
+    field is required
+  </p> -->
 
-
-<!-- </div> -->
+</div>

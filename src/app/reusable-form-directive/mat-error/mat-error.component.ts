@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 export class MatErrorComponent implements OnInit {
 
   textValue:string="test";
+  customControl:any;
   @Input()set finalValue(value:string){
     if(value){
       setTimeout(()=>{
@@ -17,13 +18,10 @@ export class MatErrorComponent implements OnInit {
       })
     }
   };
-
-  @Input() set formControl(control:FormControl){
-
-  }
+  fieldName:string;
+  formControl:FormControl;
   constructor() { }
   ngOnInit(): void {
-    // alert('ss')
   }
 
 }
