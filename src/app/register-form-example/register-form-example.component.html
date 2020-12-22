@@ -1,0 +1,27 @@
+<div>
+  <form #formRef  [formGroup]="formGroup" (formSubmitted)="onSubmit($event)"
+    *reusableFormDir="formGroup">
+    <div>
+      <label> User Name
+        <input formControlName="userName" type="text" />
+      </label>
+    </div>
+    <div>
+      <label> Email
+        <input formControlName="email" type="email" />
+      </label>
+    </div>
+    <div>
+      <label> Password
+        <input formControlName="password" type="password" />
+      </label>
+    </div>
+    <div>
+      <label> Mobile Number
+        <input formControlName="mobileNo" type="number" />
+      </label>
+    </div>
+  </form>
+</div>
+
+<button (click)="toggleIt()" mat-raised-button color="accent">toggle form</button>
