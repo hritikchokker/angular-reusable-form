@@ -1,16 +1,16 @@
 <div style="width: 100%; display: block;">
-  <p>
+  <!-- <p>
     mat error works
-  </p>
-  <ng-container *ngIf="fieldName">
-    {{fieldName}} field name
-  </ng-container>
-
-  <!-- <ng-container *ngIf="formControl">
-    <p *ngIf="formControl.hasError('required')&& formControl.dirty|| formControl.pending">
-      {{fieldName}} is required
-    </p>
+  </p> -->
+  <!-- <ng-container *ngIf="textValue">
+    {{textValue}} field name
   </ng-container> -->
+
+  <ng-container *ngIf="formControl">
+    <p *ngIf="formControl.hasError('required')&& formControl.dirty">
+      {{textValue}} is required
+    </p>
+  </ng-container>
   <p >
   </p>
   <!-- <p *ngIf="formControl.hasError('required')">

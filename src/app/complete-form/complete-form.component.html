@@ -3,19 +3,20 @@
     <div #contentForm>
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput formControlName="userName" type="text" />
+        <input #hritikRef class="formElement" matInput formControlName="userName" type="text" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
+        <input #hritikRef class="formElement" matInput formControlName="email" type="email" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="text" />
+        <input #hritikRef matInput class="formElement" formControlName="password" type="password" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>technology</mat-label>
-        <mat-select formControlName="type">
+        <mat-select #hritikRef class="formElement" formControlName="type">
+          <mat-option [value]="undefined">select</mat-option>
           <mat-option [value]="item?.value" *ngFor="let item of optionTypes">
             {{item?.text}}
           </mat-option>
@@ -23,7 +24,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Mobile Number</mat-label>
-        <input matInput formControlName="mobileNo" type="text" />
+        <input #hritikRef class="formElement" matInput formControlName="mobileNo" type="number" />
       </mat-form-field>
       <button type="submit" mat-raised-button color="warn">Submit</button>
     </div>

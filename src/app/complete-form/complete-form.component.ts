@@ -34,7 +34,7 @@ export class CompleteFormComponent implements OnInit {
   }
 
   onSubmit(json:any){
-
+    console.log(json,'final value')
   }
 
 }

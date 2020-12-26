@@ -5,13 +5,15 @@ import {
   ComponentFactoryResolver,
   ComponentRef,
   ContentChild,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
-  Renderer2,
-  ViewChild
+  QueryList,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import {
   FormControl,
@@ -30,41 +32,63 @@ import { ViewContainerRef } from '@angular/core';
 export class FormHandlerComponent implements OnInit, AfterContentInit {
 
   testControl = new FormControl();
+  formControlNames: string[] = [];
   @Input() formGroup: FormGroup;
   errorComponentRef: ComponentRef<MatErrorComponent>;
   constructor(
     private _viewContainerRef: ViewContainerRef,
     private _componentResolver: ComponentFactoryResolver,
-    private _cdk: ChangeDetectorRef,
-    private _renderer: Renderer2
+    private _cdk: ChangeDetectorRef
   ) { }
-
-  @ViewChild('testone') testone: ElementRef<MatFormField>;
   ngOnInit(): void {
   }
   @Output() submittedForm: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('contentForm') contentForm: ElementRef<HTMLDivElement>;
-
-
+  @ViewChildren(MatErrorComponent) MatErroComponent: QueryList<MatErrorComponent>;
   ngAfterContentInit() {
+    this.handleDynamicError();
+  }
+  handleDynamicError() {
     const collection: HTMLCollection = this.contentForm.nativeElement.getElementsByTagName('mat-form-field')
     const matErrorComponent = this._componentResolver.resolveComponentFactory(MatErrorComponent);
     for (let i = 0; i < collection.length; i++) {
+      const name = collection[i].getElementsByClassName('formElement');
       this.errorComponentRef = this._viewContainerRef.createComponent(matErrorComponent);
-      const inputCollection: HTMLCollection = collection[i].getElementsByTagName('input');
-      collection[i].after(this.errorComponentRef.location.nativeElement)
-      for (let j = 0; j < inputCollection.length; j++) {
-        const formControlName = inputCollection[j].getAttribute('formcontrolname')
-        console.log(formControlName, 'my control bname')
-        this.errorComponentRef.instance.formControl = this.formGroup.controls[formControlName] as FormControl;
-        this.errorComponentRef.instance.finalValue = formControlName;
+      for (let j = 0; j < name.length; j++) {
+        collection[i].after(this.errorComponentRef.location.nativeElement)
+        this.errorComponentRef.instance.finalValue = name[j].getAttribute('formcontrolname');
+        this.errorComponentRef.instance.customControl = this.formGroup.controls[name[j].getAttribute('formcontrolname')] as FormControl;
+        this.formControlNames.push(name[j].getAttribute('formcontrolname'));
+        this._cdk.detectChanges();
       }
-      this._cdk.detectChanges();
+    }
+    this._cdk.detectChanges();
+  }
+
+  get controls() { return this.formGroup.controls };
+
+
+  handleSubmit() {
+    this.checkValidations();
+    if (this.formGroup.valid) {
+      this.submittedForm.emit({ ...this.formGroup.value })
     }
   }
 
+  checkValidations() {
+    this.formControlNames.forEach((item, index) => {
+      if (!this.controls[item].dirty && this.controls[item].hasError('required')) {
+        this.controls[item].markAsDirty();
+        this.controls[item].setErrors({
+          'required': true
+        })
+      }
+    })
+  }
+
   ngAfterViewInit() {
+
     // console.log(this.testone,'my custom mat form ')
   }
 
