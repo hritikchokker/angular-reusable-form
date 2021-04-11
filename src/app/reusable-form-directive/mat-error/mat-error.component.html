@@ -1,17 +1,19 @@
-<div style="width: 100%; display: block;">
-  <!-- <p>
-    mat error works
-  </p> -->
-  <!-- <ng-container *ngIf="textValue">
-    {{textValue}} field name
-  </ng-container> -->
-
+<div [ngStyle]="{'width': '100%','display': 'block'}">
   <ng-container *ngIf="formControl">
     <p *ngIf="formControl.hasError('required')&& formControl.dirty">
       {{textValue}} is required
     </p>
+    <p *ngIf="formControl.hasError('minLength')&& formControl.dirty">
+      {{textValue}} is must be minimum length
+    </p>
+    <p *ngIf="formControl.hasError('pattern')&& formControl.dirty">
+      {{textValue}} is not valid
+    </p>
+    <p *ngIf="formControl.hasError('maxLength')&& formControl.dirty">
+      {{textValue}} is not valid
+    </p>
   </ng-container>
-  <p >
+  <p>
   </p>
   <!-- <p *ngIf="formControl.hasError('required')">
     field is required

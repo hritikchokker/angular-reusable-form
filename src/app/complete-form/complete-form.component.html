@@ -1,33 +1,23 @@
+<!-- <app-form-handler (submittedForm)="onSubmit($event)" [formGroup]="formGroup"> -->
 <div>
-  <app-form-handler (submittedForm)="onSubmit($event)" [formGroup]="formGroup">
-    <div #contentForm>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input #hritikRef class="formElement" matInput formControlName="userName" type="text" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input #hritikRef class="formElement" matInput formControlName="email" type="email" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input #hritikRef matInput class="formElement" formControlName="password" type="password" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>technology</mat-label>
-        <mat-select #hritikRef class="formElement" formControlName="type">
-          <mat-option [value]="undefined">select</mat-option>
-          <mat-option [value]="item?.value" *ngFor="let item of optionTypes">
-            {{item?.text}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Mobile Number</mat-label>
-        <input #hritikRef class="formElement" matInput formControlName="mobileNo" type="number" />
-      </mat-form-field>
-      <button type="submit" mat-raised-button color="warn">Submit</button>
-    </div>
-  </app-form-handler>
-
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit($event)">
+    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['email']" [controlName]="'email'" [type]="'email'" [placeholder]="'Email'">
+    </app-input-field>
+    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['userName']" [controlName]="'userName'" [type]="'text'" [placeholder]="'User Name'">
+    </app-input-field>
+    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['age']" [controlName]="'age'" [type]="'number'" [placeholder]="'Age'">
+    </app-input-field>
+    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['password']" [controlName]="'password'" [type]="'password'" [isPassword]="true"
+      [placeholder]="'Password'">
+    </app-input-field>
+    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['dob']" [controlName]="'dob'" [type]="'date'" [placeholder]="'Date Of Birth'">
+    </app-input-field>
+    <button type="submit" mat-raised-button color="warn">Submit</button>
+  </form>
 </div>
+<!-- </app-form-handler> -->

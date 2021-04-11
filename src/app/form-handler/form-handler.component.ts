@@ -9,6 +9,7 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
   QueryList,
@@ -45,12 +46,12 @@ export class FormHandlerComponent implements OnInit, AfterContentInit {
   @Output() submittedForm: EventEmitter<any> = new EventEmitter();
 
   @ContentChild('contentForm') contentForm: ElementRef<HTMLDivElement>;
-  @ViewChildren(MatErrorComponent) MatErroComponent: QueryList<MatErrorComponent>;
+  @ViewChildren(MatErrorComponent) MatErrorComponent: QueryList<MatErrorComponent>;
   ngAfterContentInit() {
-    this.handleDynamicError();
+    // this.handleDynamicError();
   }
   handleDynamicError() {
-    const collection: HTMLCollection = this.contentForm.nativeElement.getElementsByTagName('mat-form-field')
+    const collection: HTMLCollection = this.contentForm.nativeElement.getElementsByTagName('mat-form-field');
     const matErrorComponent = this._componentResolver.resolveComponentFactory(MatErrorComponent);
     for (let i = 0; i < collection.length; i++) {
       const name = collection[i].getElementsByClassName('formElement');
@@ -60,10 +61,11 @@ export class FormHandlerComponent implements OnInit, AfterContentInit {
         this.errorComponentRef.instance.finalValue = name[j].getAttribute('formcontrolname');
         this.errorComponentRef.instance.customControl = this.formGroup.controls[name[j].getAttribute('formcontrolname')] as FormControl;
         this.formControlNames.push(name[j].getAttribute('formcontrolname'));
-        this._cdk.detectChanges();
+        // this._cdk.detectChanges();
       }
     }
     this._cdk.detectChanges();
+    // this.checkValidations();
   }
 
   get controls() { return this.formGroup.controls };
@@ -88,7 +90,9 @@ export class FormHandlerComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterViewInit() {
-
+    this.formGroup.valueChanges.subscribe(data => {
+      // console.log(this.MatErrorComponent, 'errors')
+    })
     // console.log(this.testone,'my custom mat form ')
   }
 

@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { CompleteFormComponent } from './complete-form.component';
 import { FormHandlerModule } from '../form-handler/form-handler.module';
+import { InputFieldModule } from '../input-field/input-field.module';
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -14,9 +12,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: CompleteFormComponent }]),
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
+    InputFieldModule,
     MatButtonModule,
     FormHandlerModule,
     MatSelectModule

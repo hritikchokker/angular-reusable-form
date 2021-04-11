@@ -1,0 +1,46 @@
+<ng-container *ngIf="formControl">
+  <span [ngStyle]="fieldClass" [class]="fieldClass">
+    <ng-container [ngSwitch]="type">
+      <ng-container *ngSwitchCase="'date'">
+        <mat-form-field>
+          <mat-label>{{placeholder}}</mat-label>
+          <input [formControl]="formControl" matInput [matDatepicker]="datepicker">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker>
+            <mat-datepicker-actions>
+              <button mat-button matDatepickerCancel>Cancel</button>
+              <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            </mat-datepicker-actions>
+          </mat-datepicker>
+          <mat-error>
+            {{formControl | validationHandler: placeholder:errorMessage}}
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngSwitchCase="'password'">
+        <mat-form-field [appearance]="appearance">
+          <mat-label>{{placeholder}}</mat-label>
+          <input (hideCross)="showCrossIcon = $event" (onBlurEmit)="emitValue($event)" formField
+            [autocomplete]="autoComplete" matInput [formControl]="formControl" [type]="hide?'text':'password'" name=""
+            id="" />
+          <mat-icon (click)="handleFieldHide()" matSuffix>
+            {{hide? 'visibility':'visibility_off'}}
+          </mat-icon>
+          <mat-error>
+            {{formControl | validationHandler: placeholder:errorMessage}}
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <mat-form-field [appearance]="appearance">
+          <mat-label>{{placeholder}}</mat-label>
+          <input (hideCross)="showCrossIcon = $event" (onBlurEmit)="emitValue($event)" formField
+            [autocomplete]="autoComplete" matInput [formControl]="formControl" [type]="type" name="" id="" />
+          <mat-error>
+            {{formControl | validationHandler: placeholder:errorMessage}}
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+  </span>
+</ng-container>
