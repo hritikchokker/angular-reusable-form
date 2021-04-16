@@ -47,11 +47,12 @@ export class InputFieldComponent {
   @Input() fieldStyle = {};
   @Input() errorMessage = '';
   @Input() autoComplete = 'off';
+  @Input() optionsList = [];
   hide = false;
   showCrossIcon: boolean;
   @Input() set markAsTouch(flag: boolean) {
     if (flag) {
-      if (!this.formControl.value || !this.formControl.value.trim()) {
+      if (!this.formControl.value) {
         this.formControl.setValue('');
         this.showCrossIcon = false;
       }

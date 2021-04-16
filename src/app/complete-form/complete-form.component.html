@@ -1,8 +1,9 @@
 <!-- <app-form-handler (submittedForm)="onSubmit($event)" [formGroup]="formGroup"> -->
-<div>
+<div class="container">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit($event)">
-    <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
-      [control]="formGroup.controls['email']" [controlName]="'email'" [type]="'email'" [placeholder]="'Email'">
+    <app-input-field [fieldStyle]="{'background-color':'red'}" [markAsTouch]="markFormDirty"
+      (emitControlValue)="valueUpdate($event)" [control]="formGroup.controls['email']" [controlName]="'email'"
+      [type]="'email'" [placeholder]="'Email'">
     </app-input-field>
     <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
       [control]="formGroup.controls['userName']" [controlName]="'userName'" [type]="'text'" [placeholder]="'User Name'">
@@ -17,7 +18,21 @@
     <app-input-field [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
       [control]="formGroup.controls['dob']" [controlName]="'dob'" [type]="'date'" [placeholder]="'Date Of Birth'">
     </app-input-field>
-    <button type="submit" mat-raised-button color="warn">Submit</button>
+    <app-input-field [optionsList]="genderArr" [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['gender']" [controlName]="'gender'" [type]="'radio'" [placeholder]="'Gender'">
+    </app-input-field>
+    <app-input-field [fieldStyle]="{'display':'block','padding':'10px' ,'margin':'10px 0 10px 10px'}"
+      [markAsTouch]="markFormDirty" (emitControlValue)="valueUpdate($event)"
+      [control]="formGroup.controls['receiveUpdate']" [controlName]="'receiveUpdate'" [type]="'checkbox'"
+      [placeholder]="'Receive Updates'">
+    </app-input-field>
+    <div class="action_container">
+      <button type="submit" mat-raised-button color="warn">Submit</button>
+    </div>
   </form>
 </div>
+<div [ngStyle]="{'text-align':'center',margin:'20px'}">
+  {{formGroup?.value |json}}
+</div>
+
 <!-- </app-form-handler> -->

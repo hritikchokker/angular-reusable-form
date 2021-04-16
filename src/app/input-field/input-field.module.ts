@@ -8,12 +8,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 const modules = [
   MatFormFieldModule,
   MatInputModule,
   ReactiveFormsModule,
+  MatRadioModule,
   MatIconModule,
+  MatCheckboxModule,
   MatDatepickerModule,
   MatNativeDateModule,
   // MatMomentDateModule,

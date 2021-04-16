@@ -30,6 +30,11 @@ export class CompleteFormComponent implements OnInit {
       value: 3, text: 'vue'
     }
   ]
+  genderArr = [
+    { text: 'Male', value: 'm' },
+    { text: 'Female', value: 'f' },
+    { text: 'Other', value: 'o' }
+  ]
   formGroup: FormGroup;
   markFormDirty = false;
   get f() { return this.formGroup.controls };
@@ -41,7 +46,9 @@ export class CompleteFormComponent implements OnInit {
       age: ['', [Validators.required]],
       dob: ['', Validators.required],
       password: ['', [Validators.required]],
+      gender: ['', Validators.required],
       mobileNo: ['', [Validators.required]],
+      receiveUpdate: [false],
       type: ['', [Validators.required]]
     });
 
